@@ -1,0 +1,642 @@
+body {
+    font-family: 'Times New Roman';
+    width: 100%;
+    height: 100%;
+    background-image: url('images/plane-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+    background-color: #09057D;
+    color: white;
+    position: relative;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.left-header-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.booking-steps {
+    display: flex;
+    flex-direction: row;
+    align-self: end;
+    justify-self: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.booking-steps p {
+    font-size: 1.7rem; 
+    margin: 0;
+    margin-bottom: 0.5rem;
+    padding-right: 1rem;
+}
+
+.highlighted {
+    text-decoration: underline;
+}
+
+h1 {
+    font-size: 2.9rem;
+    margin: 0;
+}
+
+h2 {
+    color: white;
+    font-size: 2.8rem;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0.675rem;
+}
+
+h3 {
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+    margin-top: 0;
+    margin-left: 3rem;
+}
+
+h4 {
+    font-size: 1.56rem;
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    padding-left: 1rem;
+}
+
+.error, .success {
+    font-size: 2.04rem;
+    text-align: center;
+}
+
+.mail {
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+#plane {
+    margin-inline: 0.9rem;
+}
+
+.container {
+    min-width: 47%;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding-top: 2.7rem;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    /*margin-inline: 5vw;*/
+    font-size: 1.2rem;
+}
+
+
+
+/* Flight form styles */
+
+.flight-form {
+    margin-inline: 5vw;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-inline: 0.55rem;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.625rem;
+}
+
+.form-section label {
+    margin-bottom: 0.3rem;
+    white-space: nowrap;
+}
+
+.location-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-right: 2rem;
+}
+
+
+/* Flight card option styles */
+
+.flight-options {
+    max-height: 37.5rem;
+    overflow-y: auto;
+    margin-bottom: 1.25rem;
+}
+
+.flight-card {
+    background-color: white;
+    border-radius: 1rem;
+    margin: 0.55rem;
+    padding-left: 1rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.5rem;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.flight-card label{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.flight-card .group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25%;
+    margin: 0;
+}
+
+.flight-card .group p {
+    margin: 0;
+}
+
+.flight-card .group strong {
+    margin-bottom: 0rem;
+}
+
+.flight-card .locations {
+    margin-bottom: 1rem;
+}
+
+.flight-card .location {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+   
+}
+
+.flight-card .last-part {
+    width: 20%;
+}
+
+.flight-card .icon {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+
+/* Form input styles */
+
+input[type="radio"] {
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-left: 0.8rem;
+    margin-right: 0.8rem;
+    margin-top: 0;
+}
+
+.number-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 2rem;
+}
+
+.number-input label{
+    margin: 0;
+}
+
+input[type="number"] {
+    width: 6ch;
+    min-width: 4ch;
+    font-size: 1em;
+    margin-left: 0.6rem;
+    text-align: end;
+}
+
+input[type="text"], input[type="date"], select, input[type="email"], input[type="tel"] {
+    width: 12rem;
+    height: 1.875rem;
+    font-size: 1em;
+}
+
+select {
+    width: 12rem;
+    height: 2.164rem;
+    font-size: 1em;
+}
+
+select option[disabled] {
+    color: gray;
+}
+
+select option:not([disabled]) {
+    color: black;
+}
+
+select:invalid {
+    color: gray;
+}
+/*
+select:valid {
+    color: black;
+}
+*/
+
+/* Button styles */
+
+.hidden-section {
+    display: none;
+    flex-direction: column;
+}
+
+input[type="submit"] {
+    background-color: #0072C3;
+    border: none;
+    color: #ffffff;
+    border-radius: 2rem;
+    width: 8.4rem;
+    height: 2.688rem;
+    font-size: 1.08rem;
+    text-align: center;
+    margin-right: 2rem;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #005bb5;
+}
+
+.cancel {
+    background-color: gray;
+    color: #ffffff;
+    border-radius: 2rem;
+    width: 8.4rem;
+    height: 2.688rem;
+    font-size: 1.08rem;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    
+}
+
+.cancel:hover {
+    background-color: #5a5a5a;
+}
+
+.swap {
+    width: 2rem;
+    height: 2rem;
+    padding: none;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-bottom: 0.625rem;
+    margin-inline: 0.5rem;
+}
+
+.swap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin-top: 1.563rem;
+}
+
+
+/* Styles for elements on passenger-info.php page */
+
+.flight-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.flight-details .section {
+    display: flex;
+    flex-direction: column;
+}
+
+.flight-details .section p {
+    font-size: 1.32rem;
+    margin-left: 1rem;
+    margin-top: 0;
+}
+
+.passenger-form {
+    margin-inline: 8vw; /*9.6rem*/
+}
+
+.passenger-form .group {
+    display: flex;
+    flex-direction: row;    
+}
+
+.passenger-form .section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.625rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.section input {
+    width: 100%;
+}
+
+.ticket-info {
+    display: flex;
+    flex-direction: column;
+    /*padding-inline: 4vw;*/
+}
+
+.ticket {
+    background-color: white;
+    border-radius: 1rem;
+    margin: 0.55rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+}
+
+.tickets {
+    display: flex;
+    flex-direction: column;
+    max-height: 25rem;
+    overflow-y: auto;
+}
+
+
+/*
+    MEDIA QUERIES 
+*/
+
+/* SMALL DESKTOP / LARGE DEVICE*/
+@media screen and (max-width:80em) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .booking-steps p {
+        font-size: 1.5rem;
+    }
+
+    #plane {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+}
+
+/* LARGE DEVICE */
+@media screen and (max-width:64em) {
+    h1 {
+        font-size: 2.1rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .booking-steps p {
+        font-size: 1.2rem;
+    }
+
+    #plane {
+        width: 2.8rem;
+        height: 2.8rem;
+        margin-inline: 0.5rem;
+    }
+}
+
+
+/* TABLET */
+@media screen and (max-width:52em) {
+    .container {
+        min-width: none;
+        width: 90%;
+    }
+
+    .location-group {
+        margin-right: 0;
+    }
+
+    header {
+        display: block;
+    }
+
+    .booking-steps {
+        position: static;
+        justify-content: center;
+        transform: none;
+    }
+
+    
+}
+
+    
+/* SMALLER TABLET */
+@media screen and (max-width:48em) {
+    input[type="date"], select {
+        width: 9rem;
+    }
+
+    .flight-options {
+        font-size: 1rem;
+    }
+
+    .flight-details .section p {
+        font-size: 1.2rem;
+    }
+}
+
+
+/* MOBILE */
+@media screen and (max-width:37.5em) {
+    header {
+        height: 4rem;
+    }
+
+    #plane {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .booking-steps p {
+        font-size: 1.1rem; 
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        display: none;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+        margin-left: 1rem;
+    }
+
+    .error, .success {
+        font-size: 1.6rem;
+    }
+
+    .mail {
+        font-size: 1.2em;
+    }
+
+    .container {
+        width: 95%;
+        padding-top: 1rem;
+        margin-top: 1rem;
+    }
+    
+    form {
+        font-size: 1rem;
+    }
+
+    .flight-form {
+        margin: 0;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-section {
+        width: 90%;
+    }
+
+    .location-group {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        margin-right: 0;
+    }
+
+    .flight-card .group {
+        width: 36%;
+    }
+
+    .flight-card .last-part {
+        width: 18%;
+    }
+
+    input[type="text"], input[type="date"], select, input[type="email"], input[type="tel"] {
+        width: 100%;
+    }
+
+    input[type="date"] {
+        width: 98.8%;
+    }
+
+    input[type="radio"] {
+        height: 1rem;
+        width: 1rem;
+    }
+
+    .swap {
+        align-self: center;
+        margin: 0;
+    }
+
+    .swap img {
+        transform: rotate(90deg);
+    }
+
+    .flight-options {
+        font-size: 0.8em;
+        margin: auto; 
+    }
+
+    .passenger-form .group {
+        display: flex;
+        flex-direction: column;    
+    }
+
+    .ticket-info .group .section {
+        font-size: 1.2rem;
+    }
+
+    .flight-details {
+        flex-direction: column;
+        margin: auto;
+        max-width: 80%;
+        padding-left: 2rem; 
+    }
+
+    .button-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cancel {
+        width: 17rem;
+    }
+
+    input[type="submit"] {
+        margin: 0;
+        margin-bottom: 0.5rem;
+        width: 17rem;
+    }
+
+    .tickets {
+        max-height: none;
+    }    
+}
+
+/* SMALL MOBILE */
+@media screen and (max-width:31.25em) {
+
+    .flight-options {
+        font-size: 0.6em;
+    }
+
+    .passenger-form {
+        margin: 0;
+    }
+
+    .flight-details {
+        margin: 0;
+    } 
+
+    .flight-card .locations {
+        margin-bottom: 0.5rem;
+    }
+
+    input[type="radio"] {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+}
