@@ -17,7 +17,7 @@ Welcome to **JC Airlines**, a flight booking web application that allows users t
 
 ## Project Overview
 
-The **JC Airlines** project provides a functional flight booking experience. It supports features like searching for flights based on destinations, dynamically swapping locations, and highlighting the current step of the booking process. It integrates front-end interactivity and back-end support with a database to manage flight and passenger details.
+The **JC Airlines** project provides a functional flight booking experience. It supports features like searching for flights based on destinations, dynamically swapping locations, highlighting the current step of the booking process and sending ordered tickets via email. It integrates front-end interactivity and back-end support with a database to manage flight and passenger details.
 
 ---
 
@@ -25,7 +25,8 @@ The **JC Airlines** project provides a functional flight booking experience. It 
 
 - **Flight Search**: Users can search for available flights by providing the departure city,  destination city and the departure date.  
 - **Dynamic Location Swapping**: Easily swap the selected departure and destination cities with a button click.  
-- **Step Highlighting**: The application highlights the current booking step to improve user experience.  
+- **Step Highlighting**: The application highlights the current booking step to improve user experience. 
+- **Emailing**: Ordered tickets are sent to passengers via email.
 - **Responsive Design**: The UI adjusts smoothly to different screen sizes (desktop, tablet, and mobile).  
 - **Real-Time Data Fetching**: Fetch flight information from a back-end database dynamically.  
 - **Error Handling**: Provides informative messages for invalid inputs or unavailable flights.  
