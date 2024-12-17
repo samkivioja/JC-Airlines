@@ -8,12 +8,21 @@ if (($_SERVER["REQUEST_METHOD"] === "POST") && isset($_SESSION['flightId'], $_SE
     $ticketCount = $_SESSION['ticketCount'];
     $date = $_SESSION['date'];
     
-    $sql = "SELECT * FROM lennot WHERE LentoID = '$flightId'";
-    $result = $conn -> query($sql);
+    // Get the selected flight from the database
+    $sql = "SELECT * FROM lennot WHERE LentoID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $flightId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
     
 
     if ($result) {
         $flight = $result -> fetch_assoc();
+
+        $error = "Valitettavasti lennolla ei ole tarpeeksi vapaita paikkoja.\n"
+                    . "Vapaat paikat lennolla: " . $flight['VapaatPaikat']
+                    . "\nValitsemasi lippujen määrä: " . $ticketCount;
 
         if ($ticketCount <= $flight['VapaatPaikat']) {
 
@@ -48,10 +57,14 @@ if (($_SERVER["REQUEST_METHOD"] === "POST") && isset($_SESSION['flightId'], $_SE
                     // Retrieve passenger data from the form
                     $etunimi = $conn -> real_escape_string($_POST["nimi-$i"]);
                     $sukunimi = $conn -> real_escape_string($_POST["sukunimi-$i"]);
-                    $email = $conn -> real_escape_string($_POST["email-$i"]);
+                    $email = filter_var(trim($_POST["email-$i"]), FILTER_VALIDATE_EMAIL); // Validate email format
                     $osoite = $conn -> real_escape_string($_POST["osoite-$i"]);
                     $puhelin = $conn -> real_escape_string($_POST["puhelin-$i"]);
 
+                    // Check if the email is valid
+                    if (!$email) {
+                        throw new Exception("Invalid email address for passenger $i.");
+                    }
                     // Hash email address
                     $email_hashed = password_hash($email, PASSWORD_BCRYPT);
                     // Excecute query
@@ -88,9 +101,9 @@ if (($_SERVER["REQUEST_METHOD"] === "POST") && isset($_SESSION['flightId'], $_SE
                 $error = "Transaction failed: ". $e->getMessage();
             }
         } else {
-            $error = "Valitettavasti lennolla ei ole tarpeeksi vapaita paikkoja.<br>"
+            $error = "Valitettavasti lennolla ei ole tarpeeksi vapaita paikkoja.\n"
                     . "Vapaat paikat lennolla: " . $flight['VapaatPaikat']
-                    . "<br>Valitsemasi lippujen määrä: " . $ticketCount;
+                    . "\nValitsemasi lippujen määrä: " . $ticketCount;
         }
 
     } else {
@@ -117,7 +130,7 @@ require_once './includes/header.php';
         <main class="container">
 
             <?php if (isset($error)): ?>
-                <p class="error"><?= $error ?></p>
+                <p class="error"><?= nl2br(htmlspecialchars($error)) ?></p>
             <?php else: ?>
                 <p class="success">Tilaus onnistui!</p>
                 <p class="mail">Liput lähetetään email osoitteisiin.</p>
