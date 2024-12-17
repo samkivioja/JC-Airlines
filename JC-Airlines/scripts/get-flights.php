@@ -6,27 +6,32 @@ $data = json_decode(file_get_contents("php://input"), true);
 require_once "db_connection.php";
 
 // Validate the input
-if (!isset($data['kohde']) || !isset($data['lähtöpaikka']) ) {
+if (!isset($data['kohde']) || !isset($data['lähtöpaikka'])) {
     echo json_encode(["error" => "Invalid input"]);
     exit;
 }
 
-$lähtöpaikka = $conn->real_escape_string($data['lähtöpaikka']);
-$kohde = $conn->real_escape_string($data['kohde']);
+$lähtöpaikka = $data['lähtöpaikka'];
+$kohde = $data['kohde'];
 
-$sql = "SELECT * 
-        FROM lennot 
-        WHERE LähtöKaupunki = '$lähtöpaikka'
-        AND KohdeKaupunki = '$kohde'
-        AND VapaatPaikat != 0;
-        ";
+try {
+    // Prepare the SQL statement
+    $stmt = $conn->prepare("SELECT * 
+                            FROM lennot 
+                            WHERE LähtöKaupunki = ? 
+                            AND KohdeKaupunki = ? 
+                            AND VapaatPaikat != 0");
+    
+    // Bind parameters
+    $stmt->bind_param("ss", $lähtöpaikka, $kohde);
+    // Execute the statement
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-$result = $conn -> query($sql);
+    $flights = [];
 
-$flights = [];
-
-if ($result && $result -> num_rows > 0) {
-    while($row = $result -> fetch_assoc()) {
+    // Fetch the data
+    while ($row = $result->fetch_assoc()) {
         $flights[] = [
             "id" => $row["LentoID"],
             "lähtöMaa" => $row["LähtöMaa"],
@@ -39,10 +44,17 @@ if ($result && $result -> num_rows > 0) {
             "vapaatPaikat" => $row["VapaatPaikat"]
         ];
     }
+
+    // Close the statement
+    $stmt->close();
+
+} catch (Exception $e) {
+    echo json_encode(["error" => "Database query failed"]);
+    exit;
 }
 
-// Close db connection
-$conn -> close();
+// Close the database connection
+$conn->close();
 
 // Return flights in JSON
 echo json_encode($flights);
