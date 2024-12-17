@@ -5,44 +5,49 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     require_once "./scripts/db_connection.php";
 
-    $flightId = $_POST['flight'];
-    $ticketCount = $_POST['määrä'];
-    $date = $_POST['päivä'];
+    // Check for required POST data
+    $flightId = $_POST['flight'] ?? null;
+    $ticketCount = $_POST['määrä'] ?? null;
+    $date = $_POST['päivä'] ?? null;
 
+    // Validate inputs
     if ($flightId && $ticketCount && $date) {
-        // Sanitize inputs
-        $flightId = $conn -> real_escape_string($flightId);
-        $ticketCount = $conn -> real_escape_string($ticketCount);
-        $date = $conn -> real_escape_string($date);
+        try {
+            // Prepare the SQL statement
+            $stmt = $conn->prepare("SELECT * FROM lennot WHERE LentoID = ?");
+            $stmt->bind_param("i", $flightId);
+            
+            // Execute the statement
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-        // Query the database for flight data
-        $sql = "SELECT * FROM lennot WHERE LentoID = '$flightId'";
-        $result = $conn -> query($sql);
+            if ($result && $result->num_rows > 0) {
+                $flight = $result->fetch_assoc(); // Fetch flight details
 
-        if ($result && $result -> num_rows > 0) {
-            $flight = $result -> fetch_assoc(); // Fetch flight details
-
-            // Check for seat availability
-            if ($ticketCount <= $flight['VapaatPaikat']) {
-                // Store data in session variables used in finalize-booking.php
-                $_SESSION['flightId'] = $flightId;
-                $_SESSION['ticketCount'] = $ticketCount;
-                $_SESSION['date'] = $date;
-
+                // Check for seat availability
+                if ($ticketCount <= $flight['VapaatPaikat']) {
+                    // Store data in session variables used in finalize-booking.php
+                    $_SESSION['flightId'] = $flightId;
+                    $_SESSION['ticketCount'] = $ticketCount;
+                    $_SESSION['date'] = $date;
+                } else {
+                    $error = "Valitettavasti lennolla ei ole tarpeeksi vapaita paikkoja.";
+                }
             } else {
-                $error = "Valitettavasti lennolla ei ole tarpeeksi vapaita paikkoja.";
+                $error = "Lentoa ei löytynyt.";
             }
 
-        } else {
-            $error = "Lentoa ei löytynyt.";
+            $stmt->close();
+        } catch (Exception $e) {
+            $error = "Tietokantavirhe: " . $e->getMessage();
         }
     } else {
-        $error = "Virheelliset lomake tiedot.";
+        $error = "Virheelliset lomaketiedot.";
     }
-}
 
-// Close db connection
-$conn -> close();
+    // Close database connection
+    $conn->close();
+}
 
 require_once './includes/header.php';
 ?>
