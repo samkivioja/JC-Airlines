@@ -23,9 +23,9 @@
             </div>
 
             <div class="booking-steps">
-                <p>Lennon valinta</p>
-                <p>Matkustajatiedot</p>
-                <p>Viimeistely</p>
+                <a href="index.php" data-step="0"><p>Lennon valinta</p></a>
+                <a href="passenger-info.php" data-step="1"><p>Matkustajatiedot</p></a>
+                <a data-step="2"><p>Viimeistely</p></a>
             </div>
         </header>
         <h2>Fly High With JC Airlines</h2>
