@@ -47,6 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Close database connection
     $conn->close();
+
 }
 
 require_once './includes/header.php';
@@ -122,8 +123,14 @@ require_once './includes/header.php';
                     <button type="button" class="cancel" onclick="window.history.back();">Peru</button>
                 </div>
             </form>
-
-            <?php endif; ?>
+            <?php 
+            else: 
+                // Redirect to main page and end session
+                session_destroy();
+                header("Location: index.php");
+                exit();
+            
+            endif; ?>
         </main>
 
 <?php require_once './includes/footer.php'; ?>
