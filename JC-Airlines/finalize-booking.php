@@ -15,14 +15,9 @@ if (($_SERVER["REQUEST_METHOD"] === "POST") && isset($_SESSION['flightId'], $_SE
     $stmt->execute();
     $result = $stmt->get_result();
     
-    
 
     if ($result) {
         $flight = $result -> fetch_assoc();
-
-        $error = "Valitettavasti lennolla ei ole tarpeeksi vapaita paikkoja.\n"
-                    . "Vapaat paikat lennolla: " . $flight['VapaatPaikat']
-                    . "\nValitsemasi lippujen määrä: " . $ticketCount;
 
         if ($ticketCount <= $flight['VapaatPaikat']) {
 
@@ -139,5 +134,4 @@ require_once './includes/header.php';
         </main>
 
 <?php require_once './includes/footer.php'; ?>
-
         
