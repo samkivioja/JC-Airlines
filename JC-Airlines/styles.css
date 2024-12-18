@@ -39,6 +39,11 @@ header {
     transform: translateX(-50%);
 }
 
+.booking-steps a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .booking-steps p {
     font-size: 1.7rem; 
     margin: 0;
@@ -166,6 +171,7 @@ form {
     justify-content: space-between;
     flex-wrap: nowrap;
     width: 100%;
+    cursor: pointer;
 }
 
 .flight-card .group {
@@ -238,6 +244,10 @@ input[type="text"], input[type="date"], select, input[type="email"], input[type=
     width: 12rem;
     height: 1.875rem;
     font-size: 1em;
+}
+
+select, input[type="date"] {
+    cursor: pointer;
 }
 
 select {
@@ -414,6 +424,7 @@ input[type="submit"]:hover {
         width: 3.5rem;
         height: 3.5rem;
     }
+
 }
 
 /* LARGE DEVICE */
@@ -434,6 +445,10 @@ input[type="submit"]:hover {
         width: 2.8rem;
         height: 2.8rem;
         margin-inline: 0.5rem;
+    }
+
+    .error, .success {
+        font-size: 1.8rem;
     }
 }
 
@@ -476,6 +491,10 @@ input[type="submit"]:hover {
     .flight-details .section p {
         font-size: 1.2rem;
     }
+
+    .error, .success {
+        font-size: 1.6rem;
+    }
 }
 
 
@@ -508,7 +527,7 @@ input[type="submit"]:hover {
     }
 
     .error, .success {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
     }
 
     .mail {
