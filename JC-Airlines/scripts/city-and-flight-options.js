@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             const numberInput = document.getElementById("määrä");
                             
                             if (numberInput.value > vapaatPaikat) {
-                                numberInput.value = vapaatPaika;
+                                numberInput.value = vapaatPaikat;
                             };
                             numberInput.max = vapaatPaikat;
 
