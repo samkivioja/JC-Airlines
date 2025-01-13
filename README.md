@@ -1,6 +1,6 @@
 # JC Airlines - Flight Booking System
 
-Welcome to **JC Airlines**, a flight booking web application that allows users to search for flights, view details, and proceed with booking in a structured and intuitive manner.
+Welcome to **JC Airlines**, a proof of concept flight booking web application that allows users to search for flights, view details, and proceed with booking in a structured and intuitive manner.
 
 ---
 
